@@ -1,47 +1,46 @@
-# cdk-sam-lambda-rest Demonstrating a serverless REST service using AWS CDK, AWS SAM, and AWS Lambda
+# cdk-sam-lambda-rest
+
+This is a small project that demonstrates how to deploy a lightweight,
+serverless REST microservice using AWS CDK, AWS SAM, AWS API Gateway V2,
+and AWS Lambda.
 
 
-# Dev prerequisites
+## Key Technologies
 
-* [CDK](https://docs.aws.amazon.com/cdk/latest/guide/getting_started.html#getting_started_install):
+[AWS Lambda](https://docs.aws.amazon.com/lambda/latest/dg/python-handler.html)
+is used to create a simple Python application that returns a message and a timestamp.
 
-        npm install aws-cdk
+[AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-cdk-getting-started.html)
+is used to provide a way to test the Lambda in your local environment (CDK support is in beta).
 
-* [AWS CLI v2](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-mac.html)
+[AWS API Gateway V2](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-lambda.html)
+is used to create a RESTful HTTP interface to the Lambda.
 
-        brew install awscli
+[AWS CDK](https://aws.amazon.com/blogs/compute/better-together-aws-sam-and-aws-cdk/)
+is used to define the Lambda and API Gateway infrastructure using
+a minimal amount of code and enable deploying them to AWS.
 
-* [SAM CLI beta](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-cdk-getting-started.html)
 
-        brew tap aws/tap
-        brew install aws/tap/aws-sam-cli-beta-cdk
+## Supporting Characters
 
-* [Docker](https://docs.docker.com/docker-for-mac/install/)
+[GNU Make](https://www.gnu.org/software/make/manual/) is used to provide a simple interface to many of the commands.
 
-    * ensure [file sharing](https://docs.docker.com/docker-for-mac/#file-sharing) is enabled
+[Pytest](https://pytest.org/) is used for some simple unit testing of the Lambda code.
 
-# Dev steps
+[Goss](https://goss.rocks/) is used for deployment validation -- useful for local and AWS deployments.
 
-## Initialize CDK project
 
-    cdk init --language python
-    source .venv/bin/activate
-    pip install -r requirements.txt
+## Getting started
 
-##  Add a goss test
-
-First we need to ensure the local service is running.
-Assuming our Lambda and CDK code is working:
-
-	sam-beta-cdk local start-api
-
-Then, in another terminal, add a Goss HTTP test:
-
-    # on a Mac, we're using an alpha release of https://goss.rocks/:
-    export GOSS_USE_ALPHA=1
-
-    # add a test of our local SAM-based HTTP service to goss.yaml
-    goss add http --insecure http://localhost:3000/
-
-    # run the test again
-    goss validate
+```
+% make help
+make targets:
+    * dependencies deps: install dev dependencies
+    * lint:              check syntax of python code
+    * local-api:         run the API locally
+    * local:             invoke the Lambda locally
+    * request req:       submit a request to the local API service
+    * requirements reqs: install python3 requirements
+    * test:              run local tests
+    * unittest:          run pytest
+```
