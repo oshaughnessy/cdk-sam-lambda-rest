@@ -25,6 +25,8 @@ a minimal amount of code and enable deploying them to AWS.
 
 [GNU Make](https://www.gnu.org/software/make/manual/) is used to provide a simple interface to many of the commands.
 
+[Pylint](https://pylint.org/) is used for some simple Python syntax checking.
+
 [Pytest](https://pytest.org/) is used for some simple unit testing of the Lambda code.
 
 [Goss](https://goss.rocks/) is used for deployment validation -- useful for local and AWS deployments.
