@@ -68,3 +68,15 @@ Start the local version of the API service:
 With that running, check the local HTTP service with goss:
 
     make goss
+
+
+## Deploy to AWS
+
+Ensure you have AWS access credentials configured in an awscli profile:
+
+    export CDK_DEFAULT_ACCOUNT=_profile_name_
+    export CDK_DEFAULT_REGION=_preferred_region_
+
+Prepare your account for deployment
+
+    make bootstrap
