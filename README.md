@@ -96,7 +96,7 @@ and then source it:
 
 Next, prepare your account for deployment and then deploy:
 
-    make bootstrap deploy
+    make bootstrap build deploy
 
 To validate, query the URL shown by the CDK and verify the response
 contains both a "message" and "timestamp" field:

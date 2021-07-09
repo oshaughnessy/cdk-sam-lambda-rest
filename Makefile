@@ -14,7 +14,7 @@ define venv
 endef
 
 .venv:
-	python3 -mvenv .venv
+	python38 -mvenv .venv
 
 local:  ## invoke the Lambda locally
 	$(call venv); \
@@ -58,9 +58,13 @@ bootstrap:
 	@$(call venv); \
 	cdk bootstrap
 
+build:
+	@$(call venv); \
+	sam-beta-cdk build
+
 deploy:
 	@$(call venv); \
-	cdk deploy
+	cdk deploy -a .aws-sam/build
 
 
 .PHONY: lint test unittest goss bootstrap
