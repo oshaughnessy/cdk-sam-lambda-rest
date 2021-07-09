@@ -1,7 +1,13 @@
+# https://github.com/aelsabbahy/goss/blob/master/docs/manual.md#http
 http:
   http://localhost:3000/:
     status: 200
     allow-insecure: true
     no-follow-redirects: false
     timeout: 5000
-    body: []
+    # check the response:
+    body:
+    # ensure the reponse has the message we want to return
+    - "\"message\": \"Automate all the things!\""
+    # ensure the response has a timestamp with digits
+    - "/\"timestamp\": [0-9]+/"

@@ -44,3 +44,25 @@ make targets:
     * test:              run local tests
     * unittest:          run pytest
 ```
+
+## Test the code locally
+
+Simple one-off test that invokes the latest Lambda code locally:
+
+    make req
+
+
+Check the code with pylint, ensuring it's valid pylint and doesn't
+have too many warnings:
+
+    make lint
+
+
+Start the local version of the API service:
+
+    make start-api
+
+
+With that running, check the local HTTP service with goss:
+
+    make goss
