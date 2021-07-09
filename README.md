@@ -74,7 +74,7 @@ Simple one-off test that invokes the latest Lambda code locally:
     make request
 
 
-Check the code with pylint, ensuring it's valid pylint and doesn't
+Check the code with pylint, ensuring it's valid Python3 and doesn't
 have too many warnings:
 
     make lint
