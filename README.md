@@ -71,7 +71,7 @@ packages:
 
 Simple one-off test that invokes the latest Lambda code locally:
 
-    make req
+    make request
 
 
 Check the code with pylint, ensuring it's valid pylint and doesn't
