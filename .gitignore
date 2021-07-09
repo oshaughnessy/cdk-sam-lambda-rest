@@ -12,3 +12,6 @@ cdk.out
 
 # AWS SAM-local CDK directory
 .aws-sam
+
+# credentials for local dev
+env.sh
