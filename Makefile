@@ -50,7 +50,7 @@ unittest:  ## run pytest
 	pytest -v --maxfail=1 --log-cli-level DEBUG
 	
 goss:
-	@echo "FIX: call goss here"
+	GOSS_USE_ALPHA=1 goss validate
 
 
 .PHONY: lint test unittest goss

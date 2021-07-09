@@ -13,6 +13,7 @@ import datetime
 
 def event_message() -> str:
     """Return the static message we use for all events"""
+
     return "Automate all the things!"
 
 
@@ -22,6 +23,7 @@ def event_timestamp(event: dict) -> str:
     If event time info is available, use that.
     Otherwise, use the current time.
     """
+
     req_context = event.get('requestContext', {})
     return req_context.get('timeEpoch', int(datetime.datetime.now().timestamp()))
 

@@ -27,3 +27,21 @@
     cdk init --language python
     source .venv/bin/activate
     pip install -r requirements.txt
+
+##  Add a goss test
+
+First we need to ensure the local service is running.
+Assuming our Lambda and CDK code is working:
+
+	sam-beta-cdk local start-api
+
+Then, in another terminal, add a Goss HTTP test:
+
+    # on a Mac, we're using an alpha release of https://goss.rocks/:
+    export GOSS_USE_ALPHA=1
+
+    # add a test of our local SAM-based HTTP service to goss.yaml
+    goss add http --insecure http://localhost:3000/
+
+    # run the test again
+    goss validate
