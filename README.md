@@ -4,6 +4,17 @@ This is a small project that demonstrates how to deploy a lightweight,
 serverless REST microservice using AWS CDK, AWS SAM, AWS API Gateway V2,
 and AWS Lambda.
 
+Ultimately, it deploys a REST endpoint in Lambda that returns a simple
+JSON message:
+
+    {
+      "message": "Automate all the things!",
+      "timestamp": 1625868715
+    }
+
+The message is always the same. The timestamp is the number of seconds
+since the UNIX epoch at the time of execution.
+
 
 ## Key Technologies
 
