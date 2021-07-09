@@ -53,4 +53,9 @@ goss:
 	GOSS_USE_ALPHA=1 goss validate
 
 
-.PHONY: lint test unittest goss
+bootstrap:
+	@$(call venv); \
+	cdk bootstrap
+	
+
+.PHONY: lint test unittest goss bootstrap
