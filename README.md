@@ -74,9 +74,21 @@ With that running, check the local HTTP service with goss:
 
 Ensure you have AWS access credentials configured in an awscli profile:
 
-    export CDK_DEFAULT_ACCOUNT=_profile_name_
+    export AWS_DEFAULT_REGION=_preferred_region_
+    export AWS_SECRET_ACCESS_KEY=_api_secret_
+    export AWS_ACCESS_KEY_ID=_api_key_id_
+
+    export CDK_DEFAULT_ACCOUNT=_aws_account_id_
     export CDK_DEFAULT_REGION=_preferred_region_
 
-Prepare your account for deployment
+Prepare your account for deployment and then deploy:
 
-    make bootstrap
+    make bootstrap deploy
+
+To validate, query the URL shown by the CDK and verify the response
+contains both a "message" and "timestamp" field:
+
+    curl _url_
+    
+TODO: should call goss here, reading the location of the URL to
+test from a stack output, invoking it with `make validate`

@@ -56,6 +56,10 @@ goss:
 bootstrap:
 	@$(call venv); \
 	cdk bootstrap
+
+deploy:
+	@$(call venv); \
+	cdk deploy
 	
 
 .PHONY: lint test unittest goss bootstrap
