@@ -31,6 +31,7 @@ request req:  ## submit a request to the local API service
 dependencies deps:  ## install dev dependencies
 	hash aws || brew install awscli
 	hash sam-beta-cdk || { brew tap aws/tap && brew install aws/tap/aws-sam-cli-beta-cdk; }
+	hash cdk || npm install -g aws-cdk
 	hash goss || { echo "Please install goss -- https://goss.rocks/"; }
 
 requirements reqs: .venv  ## install python3 requirements
@@ -48,7 +49,7 @@ test:  unittest goss  ## run local tests
 unittest:  ## run pytest
 	@$(call venv); \
 	pytest -v --maxfail=1 --log-cli-level DEBUG
-	
+
 goss:
 	GOSS_USE_ALPHA=1 goss validate
 
@@ -60,6 +61,6 @@ bootstrap:
 deploy:
 	@$(call venv); \
 	cdk deploy
-	
+
 
 .PHONY: lint test unittest goss bootstrap
