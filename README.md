@@ -47,6 +47,15 @@ make targets:
     * unittest:          run pytest
 ```
 
+## Install dev dependencies and requirements
+
+For local development and eventual deployment,
+you'll need a handful of utilities and python
+packages:
+
+    make deps reqs
+
+
 ## Test the code locally
 
 Simple one-off test that invokes the latest Lambda code locally:
@@ -72,16 +81,20 @@ With that running, check the local HTTP service with goss:
 
 ## Deploy to AWS
 
-Ensure you have AWS access credentials configured in an awscli profile:
+Ensure you have AWS access credentials configured in an awscli profile.
+It's handy to add all of this to a file, say `env.sh` (see `env.sh.example`):
 
     export AWS_DEFAULT_REGION=_preferred_region_
     export AWS_SECRET_ACCESS_KEY=_api_secret_
     export AWS_ACCESS_KEY_ID=_api_key_id_
-
     export CDK_DEFAULT_ACCOUNT=_aws_account_id_
     export CDK_DEFAULT_REGION=_preferred_region_
 
-Prepare your account for deployment and then deploy:
+and then source it:
+
+    source env.sh
+
+Next, prepare your account for deployment and then deploy:
 
     make bootstrap deploy
 
@@ -89,6 +102,6 @@ To validate, query the URL shown by the CDK and verify the response
 contains both a "message" and "timestamp" field:
 
     curl _url_
-    
+
 TODO: should call goss here, reading the location of the URL to
 test from a stack output, invoking it with `make validate`
