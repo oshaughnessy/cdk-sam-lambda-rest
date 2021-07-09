@@ -7,7 +7,7 @@ help:
 	    BEGIN { FS=":.*?## " } \
 	    $$1~/^[A-Za-z]/ && $$2~/^.+/ { \
 	        printf "    * %-18.18s %s\n",$$1":",$$2 \
-	    }' $(MAKEFILE_LIST) |sort
+	    }' $(MAKEFILE_LIST)
 
 define venv
 	. $(VENV)/bin/activate
