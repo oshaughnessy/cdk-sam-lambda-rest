@@ -63,11 +63,15 @@ unittest:  ## run pytest
 	@$(call venv); \
 	pytest -v --maxfail=1 --log-cli-level DEBUG lambda
 
-goss-local:  ## run goss local checks (requires `make start-api` running elsewhere)
+goss-local:  local-endpoint  ## run goss local checks (requires `make start-api` running elsewhere)
+	@printf "# Validating local deployment: $(ENDPOINT)\n\n"
 	@goss validate --format documentation
+	@printf -- "----\n\n"
 
-goss-remote:  ## run goss remote checks (requires `make deploy` to complete successfully)
+goss-remote:  stack-endpoint  ## run goss remote checks (requires `make deploy` to complete successfully)
+	@printf "Validating stack deployment: $(ENDPOINT)\n\n"
 	@goss validate --format documentation
+	@printf -- "----\n\n"
 
 
 bootstrap:  ## initialize CDK resources in AWS
@@ -82,15 +86,20 @@ deploy:  ## deploy resources to AWS with CDK
 	@$(call venv); \
 	cdk deploy --app .aws-sam/build --outputs-file stack-outputs.json
 
-validate: check-endpoint  ## test the deployed service
+validate: check-endpoint goss-remote  ## test the deployed service
 
-get-endpoint:
+local-endpoint:
+	$(eval export ENDPOINT="http://localhost:3000/")
+
+stack-endpoint:
 	$(eval export ENDPOINT=$(shell jq -r .CdkSamLambdaRestStack.endpoint < stack-outputs.json))
 
-endpoint: get-endpoint  ## Show the Lambda's HTTP endpoint URL
-	@echo "Service endpoint: $$ENDPOINT"
-
-check-endpoint: get-endpoint
+check-endpoint: stack-endpoint
+	@printf "# HTTP response from $(ENDPOINT):\n\n"
 	@curl -ski -o- $(ENDPOINT) && echo ""
+	@printf -- "----\n\n"
+
+endpoint: stack-endpoint  ## Show the Lambda's HTTP endpoint URL
+	@echo "Service endpoint: $$ENDPOINT"
 
 .PHONY: lint test unittest goss bootstrap

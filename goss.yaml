@@ -1,6 +1,6 @@
 # https://github.com/aelsabbahy/goss/blob/master/docs/manual.md#http
 http:
-  http://localhost:3000/:
+  {{.Env.ENDPOINT}}:
     status: 200
     allow-insecure: true
     no-follow-redirects: false
