@@ -2,7 +2,7 @@
 
 Returns a python dict that ultimately is sent back
 to the Lambda requestor as a JSON document:
-- always returns HTTP success 
+- always returns HTTP success
 - response body includes 2 fields:
   * "message" containing a string
   * "timestamp" containing # seconds since the UNIX epoch (Jan 1, 1970)

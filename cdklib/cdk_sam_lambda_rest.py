@@ -1,5 +1,7 @@
 """Module that defines CDK resources for the demo service"""
 
+# pylint: disable=line-too-long
+
 import aws_cdk.core
 import aws_cdk.aws_apigatewayv2
 import aws_cdk.aws_apigatewayv2_integrations

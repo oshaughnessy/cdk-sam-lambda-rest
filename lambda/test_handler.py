@@ -1,6 +1,9 @@
-from . import handler
+"""
+pytest functions for the Lambda handler code
+"""
+
 import datetime
-import pytest
+from . import handler
 
 
 def test_handler_message():
@@ -9,7 +12,10 @@ def test_handler_message():
 
 
 def test_handler_timestamp_default_time():
-    """Ensure the Lambda handler's timestamp funcdtion returns the current time"""
+    """Test the Lambda handler's timestamp function
+
+    It should return the current time
+    """
     now = datetime.datetime.now()
     timestamp = handler.event_timestamp({})
     print(f"timestamp={timestamp}, now={now.timestamp()}")
@@ -17,7 +23,10 @@ def test_handler_timestamp_default_time():
 
 
 def test_handler_timestamp_event_time():
-    """Ensure the Lambda handler's timestamp funcdtion returns the epoch time from the given event"""
+    """Test the Lambda handler's timestamp function
+
+    It should return the epoch time from the given event
+    """
     epoch_timestamp = '1625816819'
     handler_timestamp = handler.event_timestamp({
         'requestContext': {
@@ -35,4 +44,3 @@ def test_handler_response_message_key():
 def test_handler_response_timestamp_key():
     """Ensure the Lambda handler's response includes a message key"""
     assert 'timestamp' in handler.main({}, {})
-
