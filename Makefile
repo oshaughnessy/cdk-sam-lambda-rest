@@ -5,6 +5,7 @@ export PYENV_VERSION=3.8.11
 export PYENV_ROOT=$(root_dir)/.pyenv
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 PYENV_VIRTUALENV=cdk-sam-lambda-rest
+export GOSS_USE_ALPHA=1
 
 help:
 	@echo make targets:
@@ -56,27 +57,36 @@ lint:  ## check syntax of python code
 	@echo "Checking Python code for syntax suggestions (non-fatal)"
 	@$(call venv); pylint --exit-zero cdklib lambda
 
-test:  unittest goss  ## run local tests
+test:  unittest   ## run local tests
 
 unittest:  ## run pytest
 	@$(call venv); \
-	pytest -v --maxfail=1 --log-cli-level DEBUG
+	pytest -v --maxfail=1 --log-cli-level DEBUG lambda
 
-goss:
-	GOSS_USE_ALPHA=1 goss validate --format documentation
+goss-local:  ## run goss local checks (requires `make start-api` running elsewhere)
+	@goss validate --format documentation
+
+goss-remote:  ## run goss remote checks (requires `make deploy` to complete successfully)
+	@goss validate --format documentation
 
 
-bootstrap:
+bootstrap:  ## initialize CDK resources in AWS
 	@$(call venv); \
 	cdk bootstrap
 
-build:
+build:  ## build local SAM container
 	@$(call venv); \
 	sam-beta-cdk build
 
-deploy:
+deploy:  ## deploy resources to AWS with CDK
 	@$(call venv); \
-	cdk deploy -a .aws-sam/build
+	cdk deploy --app .aws-sam/build --outputs-file stack-outputs.json
+
+get-endpoint:
+	$(eval export ENDPOINT=$(shell jq -r .CdkSamLambdaRestStack.endpoint < stack-outputs.json))
+
+endpoint: get-endpoint  ## Show the Lambda's HTTP endpoint URL
+	@echo "Service endpoint: $$ENDPOINT"
 
 
 .PHONY: lint test unittest goss bootstrap

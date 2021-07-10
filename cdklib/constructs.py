@@ -16,7 +16,7 @@ class MessageService(aws_cdk.core.Construct):
 
         super().__init__(scope, name)
 
-        handler = aws_cdk.aws_lambda.Function(self, 'MessagesHandler',
+        self.handler = aws_cdk.aws_lambda.Function(self, 'MessagesHandler',
             runtime=aws_cdk.aws_lambda.Runtime.PYTHON_3_8,
             code=aws_cdk.aws_lambda.Code.from_asset('lambda'),
             handler='handler.main',
@@ -24,15 +24,15 @@ class MessageService(aws_cdk.core.Construct):
         )
 
         # ref: https://docs.aws.amazon.com/cdk/api/latest/python/aws_cdk.aws_apigatewayv2/README.html
-        integration = aws_cdk.aws_apigatewayv2_integrations.LambdaProxyIntegration(
-            handler=handler
+        self.integration = aws_cdk.aws_apigatewayv2_integrations.LambdaProxyIntegration(
+            handler=self.handler
         )
 
-        apigw = aws_cdk.aws_apigatewayv2.HttpApi(self, 'messages-api',
+        self.apigw = aws_cdk.aws_apigatewayv2.HttpApi(self, 'messages-api',
             description='This service returns a message with a timestamp'
         )
-        apigw.add_routes(
+        self.apigw.add_routes(
             path='/',
             methods=[aws_cdk.aws_apigatewayv2.HttpMethod.GET],
-            integration=integration
+            integration=self.integration
         )

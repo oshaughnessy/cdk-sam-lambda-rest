@@ -53,14 +53,19 @@ with your Lambda.
 ```
 % make help
 make targets:
-    * dependencies deps: install dev dependencies
-    * lint:              check syntax of python code
-    * local-api:         run the API locally
     * local:             invoke the Lambda locally
+    * local-api:         run the API locally
     * request req:       submit a request to the local API service
+    * dependencies deps: install dev dependencies
+    * virtualenv:        install python 3 and create virtualenv
     * requirements reqs: install python3 requirements
+    * lint:              check syntax of python code
     * test:              run local tests
     * unittest:          run pytest
+    * goss:              run goss local checks (requires `make start-api` running elsewhere)
+    * bootstrap:         initialize CDK resources in AWS
+    * build:             build local SAM container
+    * deploy:            deploy resources to AWS with CDK
 ```
 
 ## Install dev dependencies and requirements

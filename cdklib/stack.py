@@ -1,7 +1,7 @@
 """Module that defines a CDK app for the demo service"""
 
 import aws_cdk.core
-from . import cdk_sam_lambda_rest
+from . import constructs
 
 
 class CdkSamLambdaRestStack(aws_cdk.core.Stack):
@@ -12,5 +12,10 @@ class CdkSamLambdaRestStack(aws_cdk.core.Stack):
 
         super().__init__(scope, construct_id, **kwargs)
 
-        # The code that defines your stack goes here
-        cdk_sam_lambda_rest.MessageService(self, 'Messages')
+        # Add our MessageService to the stack
+        self.service = constructs.MessageService(self, 'Messages')
+
+        # Create a stack output to share the API Gateway's endpoint URL
+        aws_cdk.core.CfnOutput(self, 'endpoint',
+            value=self.service.apigw.url
+        )
