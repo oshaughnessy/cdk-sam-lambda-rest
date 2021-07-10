@@ -15,3 +15,6 @@ cdk.out
 
 # credentials for local dev
 env.sh
+
+# pyenv interpreter and virtualenv dirs
+.pyenv

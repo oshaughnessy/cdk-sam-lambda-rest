@@ -1,5 +1,10 @@
 LOCAL_URL=http://127.0.0.1:3000/
-VENV=.venv
+
+root_dir := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
+export PYENV_VERSION=3.8.11
+export PYENV_ROOT=$(root_dir)/.pyenv
+export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+PYENV_VIRTUALENV=cdk-sam-lambda-rest
 
 help:
 	@echo make targets:
@@ -9,12 +14,12 @@ help:
 	        printf "    * %-18.18s %s\n",$$1":",$$2 \
 	    }' $(MAKEFILE_LIST)
 
-define venv
-	. $(VENV)/bin/activate
-endef
+#	eval "$$(pyenv init -)"; \
+#	eval "$$(pyenv virtualenv-init -)"; \
 
-.venv:
-	python38 -mvenv .venv
+define venv
+	source $(PYENV_ROOT)/versions/$(PYENV_VIRTUALENV)/bin/activate
+endef
 
 local:  ## invoke the Lambda locally
 	$(call venv); \
@@ -32,11 +37,18 @@ dependencies deps:  ## install dev dependencies
 	hash aws || brew install awscli
 	hash sam-beta-cdk || { brew tap aws/tap && brew install aws/tap/aws-sam-cli-beta-cdk; }
 	hash cdk || npm install -g aws-cdk
+	hash pyenv || brew install pyenv
+	hash pyenv-virtualenv || brew install pyenv-virtualenv
 	hash goss || { echo "Please install goss -- https://goss.rocks/"; }
+	hash docker || { echo "Please install Docker -- https://docs.docker.com/get-docker/"; }
 
-requirements reqs: .venv  ## install python3 requirements
+virtualenv:  ## install python 3 and create virtualenv
+	pyenv install $(PYENV_VERSION)
+	pyenv virtualenv $(PYENV_VERSION) $(PYENV_VIRTUALENV)
+
+requirements reqs:   ## install python3 requirements
 	$(call venv); \
-	pip install -r requirements.txt
+	pip3 install -r requirements.txt
 
 lint:  ## check syntax of python code
 	@echo "Checking Python code for syntax errors (fatal)"

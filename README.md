@@ -42,6 +42,11 @@ a minimal amount of code and enable deploying them to AWS.
 
 [Goss](https://goss.rocks/) is used for deployment validation -- useful for local and AWS deployments.
 
+[Pyenv](https://github.com/pyenv/pyenv) and [pyenv-virtualenv](https://github.com/pyenv/pyenv-virtualenv) are used to manage Python on the Mac
+
+[Docker](https://docs.docker.com/get-docker/) enables SAM to run local containers
+with your Lambda.
+
 
 ## Getting started
 
@@ -60,18 +65,20 @@ make targets:
 
 ## Install dev dependencies and requirements
 
-For local development and eventual deployment,
-you'll need a handful of utilities and python
-packages:
+The instructions and Makefile targets here assume development
+on a Mac with [Homebrew](https://brew.sh) installed.
 
-    make deps reqs
+For local development and eventual deployment, you'll need a handful
+of utilities and python packages.
+
+    make deps virtualenv reqs
 
 
 ## Test the code locally
 
 Simple one-off test that invokes the latest Lambda code locally:
 
-    make request
+    make local
 
 
 Check the code with pylint, ensuring it's valid Python3 and doesn't
