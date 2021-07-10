@@ -63,7 +63,7 @@ unittest:  ## run pytest
 	pytest -v --maxfail=1 --log-cli-level DEBUG
 
 goss:
-	GOSS_USE_ALPHA=1 goss validate
+	GOSS_USE_ALPHA=1 goss validate --format documentation
 
 
 bootstrap:

@@ -80,19 +80,17 @@ Simple one-off test that invokes the latest Lambda code locally:
 
     make local
 
-
 Check the code with pylint, ensuring it's valid Python3 and doesn't
 have too many warnings:
 
     make lint
 
-
 Start the local version of the API service:
 
-    make start-api
+    make local-api
 
-
-With that running, check the local HTTP service with goss:
+With that running, check the local HTTP service with goss in another
+shell terminal:
 
     make goss
 
