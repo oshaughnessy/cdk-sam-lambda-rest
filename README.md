@@ -62,10 +62,13 @@ make targets:
     * lint:              check syntax of python code
     * test:              run local tests
     * unittest:          run pytest
-    * goss:              run goss local checks (requires `make start-api` running elsewhere)
+    * goss-local:        run goss local checks (requires `make start-api` running elsewhere)
+    * goss-remote:       run goss remote checks (requires `make deploy` to complete successfully)
     * bootstrap:         initialize CDK resources in AWS
     * build:             build local SAM container
     * deploy:            deploy resources to AWS with CDK
+    * validate:          test the deployed service
+    * endpoint:          Show the Lambda's HTTP endpoint URL
 ```
 
 ## Install dev dependencies and requirements
@@ -121,10 +124,7 @@ Next, prepare your account for deployment and then deploy:
 
     make bootstrap build deploy
 
-To validate, query the URL shown by the CDK and verify the response
-contains both a "message" and "timestamp" field:
+To validate, query the URL provided as a CDK stack output
+and verify the response contains both a "message" and "timestamp" field:
 
-    curl _url_
-
-TODO: should call goss here, reading the location of the URL to
-test from a stack output, invoking it with `make validate`
+    make validate

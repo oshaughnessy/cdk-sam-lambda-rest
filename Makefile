@@ -82,11 +82,15 @@ deploy:  ## deploy resources to AWS with CDK
 	@$(call venv); \
 	cdk deploy --app .aws-sam/build --outputs-file stack-outputs.json
 
+validate: check-endpoint  ## test the deployed service
+
 get-endpoint:
 	$(eval export ENDPOINT=$(shell jq -r .CdkSamLambdaRestStack.endpoint < stack-outputs.json))
 
 endpoint: get-endpoint  ## Show the Lambda's HTTP endpoint URL
 	@echo "Service endpoint: $$ENDPOINT"
 
+check-endpoint: get-endpoint
+	@curl -ski -o- $(ENDPOINT) && echo ""
 
 .PHONY: lint test unittest goss bootstrap
