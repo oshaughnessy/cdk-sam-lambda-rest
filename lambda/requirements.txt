@@ -1,0 +1,4 @@
+aws-cdk.core>=1.111
+aws-cdk.aws-apigatewayv2
+aws-cdk.aws-apigatewayv2-integrations
+aws-cdk.aws-lambda

@@ -94,6 +94,8 @@ shell terminal:
 
     make goss
 
+You can use `Control-C` to exit the `make local-api` session.
+
 
 ## Deploy to AWS
 
