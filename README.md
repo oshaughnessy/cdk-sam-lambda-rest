@@ -128,3 +128,23 @@ To validate, query the URL provided as a CDK stack output
 and verify the response contains both a "message" and "timestamp" field:
 
     make validate
+
+
+# What's Next?
+
+This is essentially a tech demo. Even at that level, there are opportunities
+for improvement:
+
+* Add more documentation in the cdklib and lambda dirs to explain
+  what is happening
+* Add unit testing to the cdklib code; only the lambda code has tests now
+* Add a GitHub Actions pipeline to deploy the stack to AWS
+* Improve the installation and management of requirements.
+  The toolchain required for CDK, SAM, and Python is a mess to install.
+  The Makefile targets assume a Mac environment, but a GitHub Actions
+  env won't target that. Doing everything within a Docker container
+  would surely be simpler, and would probably still allow the use
+  of SAM-local, but it wouldn't facilitate the use-case behind this
+  exercise (breaking Lambda definitions out of CloudFormation templates
+  embedded in Amazon Landing Zone add-ons), so I didn't choose that
+  path initially.
