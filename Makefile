@@ -7,6 +7,8 @@ export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 PYENV_VIRTUALENV=cdk-sam-lambda-rest
 export GOSS_USE_ALPHA=1
 
+export AWS_PROFILE ?= UNSET
+
 help:
 	@echo make targets:
 	@awk ' \
@@ -37,6 +39,7 @@ request req:  ## submit a request to the local API service
 
 dependencies deps:  ## install dev dependencies
 	hash aws || brew install awscli
+	hash aws-vault || brew install aws-vault
 	hash sam-beta-cdk || { brew tap aws/tap && brew install aws/tap/aws-sam-cli-beta-cdk; }
 	hash cdk || npm install -g aws-cdk
 	hash pyenv || brew install pyenv
@@ -78,7 +81,7 @@ goss-remote:  stack-endpoint  ## run goss remote checks (requires `make deploy` 
 
 bootstrap:  ## initialize CDK resources in AWS
 	@$(call venv); \
-	cdk bootstrap
+	aws-vault exec --duration 1h $(AWS_PROFILE) cdk bootstrap
 
 build:  ## build local SAM container
 	@$(call venv); \
@@ -86,7 +89,7 @@ build:  ## build local SAM container
 
 deploy:  ## deploy resources to AWS with CDK
 	@$(call venv); \
-	cdk deploy --app .aws-sam/build --outputs-file stack-outputs.json
+	aws-vault exec --duration 1h $(AWS_PROFILE) cdk deploy --app .aws-sam/build --outputs-file stack-outputs.json
 
 validate: check-endpoint goss-remote  ## test the deployed service
 
