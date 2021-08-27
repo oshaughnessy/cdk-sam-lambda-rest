@@ -81,7 +81,7 @@ goss-remote:  stack-endpoint  ## run goss remote checks (requires `make deploy` 
 
 bootstrap:  ## initialize CDK resources in AWS
 	@$(call venv); \
-	aws-vault exec --duration 1h $(AWS_PROFILE) cdk bootstrap
+	aws-vault exec --duration 1h $(AWS_PROFILE) -- cdk bootstrap
 
 build:  ## build local SAM container
 	@$(call venv); \
@@ -89,7 +89,7 @@ build:  ## build local SAM container
 
 deploy:  ## deploy resources to AWS with CDK
 	@$(call venv); \
-	aws-vault exec --duration 1h $(AWS_PROFILE) cdk deploy --app .aws-sam/build --outputs-file stack-outputs.json
+	aws-vault exec --duration 1h $(AWS_PROFILE) -- cdk deploy --app .aws-sam/build --outputs-file stack-outputs.json
 
 validate: check-endpoint goss-remote  ## test the deployed service
 
