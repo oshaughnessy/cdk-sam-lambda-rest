@@ -91,6 +91,10 @@ deploy:  ## deploy resources to AWS with CDK
 	@$(call venv); \
 	aws-vault exec --duration 1h $(AWS_PROFILE) -- cdk deploy --app .aws-sam/build --outputs-file stack-outputs.json
 
+destroy:  ## deploy resources to AWS with CDK
+	@$(call venv); \
+	aws-vault exec --duration 1h $(AWS_PROFILE) -- cdk destroy --app .aws-sam/build
+
 validate: check-endpoint goss-remote  ## test the deployed service
 
 local-endpoint:

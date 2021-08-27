@@ -141,6 +141,10 @@ and verify the response contains both a "message" and "timestamp" field:
 
     make validate
 
+When you're all done, tear it down:
+
+    make destroy
+
 
 # What's Next?
 
