@@ -8,6 +8,6 @@ http:
     # check the response:
     body:
     # ensure the reponse has the message we want to return
-    - "\"message\": \"Automate all the things!\""
+    - "\"message\": \"Automation for the people!\""
     # ensure the response has a timestamp with digits
     - "/\"timestamp\": [0-9]+/"

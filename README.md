@@ -8,7 +8,7 @@ Ultimately, it deploys a REST endpoint in Lambda that returns a simple
 JSON message:
 
     {
-      "message": "Automate all the things!",
+      "message": "Automation for the people!",
       "timestamp": 1625868715
     }
 

@@ -14,7 +14,7 @@ import datetime
 def event_message() -> str:
     """Return the static message we use for all events"""
 
-    return "Automate all the things!"
+    return "Automation for the people!"
 
 
 def event_timestamp(event: dict) -> str:
