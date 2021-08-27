@@ -40,7 +40,7 @@ a minimal amount of code and enable deploying them to AWS.
 
 [Pytest](https://pytest.org/) is used for some simple unit testing of the Lambda code.
 
-[Goss](https://goss.rocks/) is used for deployment validation -- useful for local and AWS deployments. &#57360; Goss Rocks!
+[Goss](https://goss.rocks/) is used for deployment validation -- useful for local and AWS deployments. &#x270a; Goss Rocks!
 
 [Pyenv](https://github.com/pyenv/pyenv) and [pyenv-virtualenv](https://github.com/pyenv/pyenv-virtualenv) are used to manage Python on the Mac.
 
