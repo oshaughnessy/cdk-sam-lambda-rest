@@ -40,12 +40,14 @@ a minimal amount of code and enable deploying them to AWS.
 
 [Pytest](https://pytest.org/) is used for some simple unit testing of the Lambda code.
 
-[Goss](https://goss.rocks/) is used for deployment validation -- useful for local and AWS deployments.
+[Goss](https://goss.rocks/) is used for deployment validation -- useful for local and AWS deployments. &#57360; Goss Rocks!
 
-[Pyenv](https://github.com/pyenv/pyenv) and [pyenv-virtualenv](https://github.com/pyenv/pyenv-virtualenv) are used to manage Python on the Mac
+[Pyenv](https://github.com/pyenv/pyenv) and [pyenv-virtualenv](https://github.com/pyenv/pyenv-virtualenv) are used to manage Python on the Mac.
 
 [Docker](https://docs.docker.com/get-docker/) enables SAM to run local containers
 with your Lambda.
+
+[aws-vault](https://github.com/99designs/aws-vault) for AWS credential management with good MFA support.
 
 
 ## Getting started
@@ -105,7 +107,9 @@ shell terminal:
 You can use `Control-C` to exit the `make local-api` session.
 
 
-## Deploy to AWS
+## Running in AWS
+
+### Credentials
 
 Ensure you have AWS access credentials configured in an awscli profile.
 It's handy to add all of this to a file, say `env.sh` (see `env.sh.example`):
@@ -119,6 +123,14 @@ It's handy to add all of this to a file, say `env.sh` (see `env.sh.example`):
 and then source it:
 
     source env.sh
+
+_Alternatively_ and arguably better, use 99designs' [aws-vault](https://github.com/99designs/aws-vault)
+to set up a profile for your chosen AWS environment. The included Makefile assumes you have aws-vault
+installed and set up. Define an AWS profile and the Makefile will do the rest:
+
+    export AWS_PROFILE=some-proile-that-aws-vault-knows-about
+
+### Deploy
 
 Next, prepare your account for deployment and then deploy:
 
