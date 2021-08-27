@@ -86,6 +86,10 @@ of utilities and python packages.
 
 ## Test the code locally
 
+Build the Lambda locally:
+
+    make build
+
 Simple one-off test that invokes the latest Lambda code locally:
 
     make local
@@ -134,7 +138,7 @@ installed and set up. Define an AWS profile and the Makefile will do the rest:
 
 Next, prepare your account for deployment and then deploy:
 
-    make bootstrap build deploy
+    make bootstrap deploy
 
 To validate, query the URL provided as a CDK stack output
 and verify the response contains both a "message" and "timestamp" field:
