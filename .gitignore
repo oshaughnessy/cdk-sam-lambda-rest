@@ -21,3 +21,6 @@ env.sh
 
 # stack outputs created by `cdk deploy`
 stack-outputs.json
+
+# direnv config
+.envrc
