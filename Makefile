@@ -25,6 +25,7 @@ endef
 local:  ## invoke the Lambda locally
 	$(call venv); \
 	sam-beta-cdk local invoke CdkSamLambdaRestStack/MessagesHandler
+	echo ""
 
 local-api:  ## run the API locally
 	$(call venv); \
@@ -49,7 +50,8 @@ virtualenv:  ## install python 3 and create virtualenv
 
 requirements reqs:   ## install python3 requirements
 	$(call venv); \
-	pip3 install -r requirements.txt
+	pip3 install --upgrade pip; \
+	pip3 install --upgrade -r requirements.txt
 
 lint:  ## check syntax of python code
 	@echo "Checking Python code for syntax errors (fatal)"

@@ -100,7 +100,7 @@ Start the local version of the API service:
 With that running, check the local HTTP service with goss in another
 shell terminal:
 
-    make goss
+    make goss-local
 
 You can use `Control-C` to exit the `make local-api` session.
 
