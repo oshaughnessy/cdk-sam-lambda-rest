@@ -15,7 +15,7 @@ JSON message:
 The message is always the same. The timestamp is the number of seconds
 since the UNIX epoch at the time of execution.
 
-A presentation summarizing this project put together here, at
+A presentation summarizing this project is available at
 [CDK and SAM-local Are Your Friends](./CDK_and_SAM-local_are_your_friends.pdf)
 
 ## Key Technologies
